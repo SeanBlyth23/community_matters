@@ -1,0 +1,88 @@
+{% extends "users/base.html" %}
+{% block title %}
+    Bulletin Board
+{% endblock title %}
+{% block content %}
+    <div class="container text-center">
+        <div class="row">
+            <div class="col-md-3 d-flex justify-content-left">
+                <h3 class="bg-warning rounded-3 px-2">BULLETIN BOARD</h3>
+            </div>
+            <div class="col-md-9 d-flex flex-column justify-content-left">
+                <div class="row">
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="Username"
+                                   aria-label="Username"
+                                   aria-describedby="addon-wrapping">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="Username"
+                                   aria-label="Username"
+                                   aria-describedby="addon-wrapping">
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="input-group">
+                            <input type="text"
+                                   class="form-control"
+                                   placeholder="Username"
+                                   aria-label="Username"
+                                   aria-describedby="addon-wrapping">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            {% if bulletins %}
+                {% for bulletin in bulletins %}
+                    <div class="col-md-2 mt-2 media">
+                        <img src="{{ bulletin.image.url }}" class="img-thumbnail" alt="...">
+                    </div>
+                    <div class="col-md-10 mt-2">
+                        <div class="card" style="width: 100%;">
+                            <div class="card-body">
+                                <h5 class="card-title">
+                                    <b>{{ bulletin.category.name }}</b>&nbsp;&nbsp;&nbsp;{{ bulletin.title }}
+                                </h5>
+                                <div class="card-text">
+                                    {{ bulletin.content }}
+                                    {% if bulletin.user.id == user.id %}
+                                        <div class="row">
+                                            <div class="col-md-10"></div>
+                                            <div class="col-md-2">
+                                                <div class="row">
+                                                    <div class="col-md-5"></div>
+                                                    <div class="col-md-3">
+                                                        <a href="#" class="link-secondary"><i class="fa fa-pencil-square fa-2xl"></i></a>
+                                                    </div>
+                                                    <div class="col-md-4">
+                                                        <a href="#" class="link-secondary"><i class="fa fa-trash fa-2xl"></i></a>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    {% else %}
+                                        <div></div>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <h1>No notices to show yet</h1>
+            {% endif %}
+        </div>
+        <br>
+    </div>
+{% endblock content %}
